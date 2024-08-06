@@ -27,7 +27,7 @@ internal static class LocalizationPatch
 			for (int i = 0; i < languages.Length; i++)
 			{
 				string language = languages[i];
-				if (entry.Map.TryGetValue(language, out string? text))
+				if (entry.Map.TryGetValue(language, out string? text) && !string.IsNullOrWhiteSpace(text))
 				{
 					stringEntry.m_Languages[i] = text;
 				}

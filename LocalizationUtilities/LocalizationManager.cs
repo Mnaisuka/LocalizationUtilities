@@ -52,7 +52,8 @@ public static class LocalizationManager
         if (string.IsNullOrWhiteSpace(contents))
             return false;
 
-        string i18nPath = Path.Combine(MelonEnvironment.ModsDirectory, "Localization.json");
+        //string i18nPath = Path.Combine(MelonEnvironment.ModsDirectory, "Localization.json");
+        string i18nPath = "Localization.json";
         Dictionary<string, Dictionary<string, string>> i18nDict = new();
 
         if (File.Exists(i18nPath))
@@ -94,8 +95,11 @@ public static class LocalizationManager
             parsedDict[key] = locEntry;
         }
 
-        string updatedI18nJson = JSON.Dump(i18nDict, EncodeOptions.PrettyPrint);
-        File.WriteAllText(i18nPath, updatedI18nJson);
+        if (File.Exists("debug"))
+        {
+            string updatedI18nJson = JSON.Dump(i18nDict, EncodeOptions.PrettyPrint);
+            File.WriteAllText(i18nPath, updatedI18nJson);
+        }
 
         List<LocalizationEntry> newEntries = new();
         foreach (var pair in parsedDict)
